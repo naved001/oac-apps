@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hcp-scheduler-monitoring
+description: Enable Prometheus metrics scraping for HCP kube-scheduler
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

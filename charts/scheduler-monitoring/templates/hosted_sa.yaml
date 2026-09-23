@@ -1,0 +1,7 @@
+{{- if eq .Values.mode "hosted" }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.hosted.serviceAccountName }}
+  namespace: {{ .Values.hosted.namespace }}
+{{- end }}

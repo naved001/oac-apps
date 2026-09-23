@@ -1,0 +1,23 @@
+{{- if eq .Values.mode "management" }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hcp-kube-scheduler-monitor
+  namespace: {{ required "A valid management.hcpNamespace is required when mode=management!" .Values.management.hcpNamespace }}
+spec:
+  selector:
+    matchLabels:
+      app: kube-scheduler
+  endpoints:
+    - targetPort: client
+      scheme: https
+      path: /metrics/resources # I am specifically ignoring the metrics at /metrics because I don't care about those
+      bearerTokenSecret:
+        name: hcp-scheduler-metrics-token
+        key: token
+      tlsConfig:
+        insecureSkipVerify: true
+      relabelings:
+        - targetLabel: cluster_name
+          replacement: {{ required "A valid management.clusterName is required when mode=management!" .Values.management.clusterName | quote }}
+{{- end }}

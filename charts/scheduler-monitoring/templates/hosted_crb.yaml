@@ -1,0 +1,14 @@
+{{- if eq .Values.mode "hosted" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hcp-scheduler-scraper-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hcp-scheduler-metrics-reader
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Values.hosted.serviceAccountName }}
+    namespace: {{ .Values.hosted.namespace }}
+{{- end }}

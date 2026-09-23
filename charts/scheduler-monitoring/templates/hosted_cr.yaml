@@ -1,0 +1,12 @@
+{{- if eq .Values.mode "hosted" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hcp-scheduler-metrics-reader
+rules:
+- nonResourceURLs:
+  - /metrics
+  - /metrics/resources
+  verbs:
+  - get
+{{- end }}

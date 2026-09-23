@@ -1,0 +1,10 @@
+mode: "management" # "hosted" or "management"
+
+hosted:
+  namespace: moc-metrics-collector
+  serviceAccountName: hcp-scheduler-scraper
+
+management:
+  hcpNamespace: ""        # namespace in the management cluster
+  clusterName: ""
+  bearerToken: ""         # token from the hosted cluster, should be pushed to an externalsecret
